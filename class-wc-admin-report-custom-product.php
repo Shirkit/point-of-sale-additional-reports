@@ -10,6 +10,7 @@ class WC_POS_Report_Custom_Product_Sales extends WC_Admin_Report
             'year' => __('Year', 'woocommerce') ,
             'last_month' => __('Last month', 'woocommerce') ,
             'month' => __('This month', 'woocommerce') ,
+			'7day' => __('Last 7 days', 'woocommerce')
         );
         $current_range = !empty($_GET['range']) ? sanitize_text_field($_GET['range']) : 'month';
         if (!in_array($current_range, array(
@@ -41,7 +42,7 @@ class WC_POS_Report_Custom_Product_Sales extends WC_Admin_Report
                     'function' => '',
                     'name' => 'custom_product_id'
                 ),
-                '_price' => array(
+                '_line_total' => array(
                     'type' => 'order_item_meta',
                     'order_item_type' => 'line_item',
                     'function' => '',
@@ -74,13 +75,6 @@ class WC_POS_Report_Custom_Product_Sales extends WC_Admin_Report
 					'operator' => '=',
 				)
 			),
-			/*'where' => array(
-				array(
-					'key' => 'order_item',
-					'value' => '_product_id'
-					'operator' => '=',
-				),
-			),*/
             'query_type' => 'get_results',
             'filter_range' => true,
         ));
